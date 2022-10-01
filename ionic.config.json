@@ -1,0 +1,7 @@
+{
+  "name": "citations",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
