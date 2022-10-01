@@ -24,3 +24,17 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+// permet de surélever la page pour s'afficher au dessus du tabs
+.md section {
+  margin: 95px 0;
+}
+
+.ios section {
+  margin: 0 !important;
+}
+
+// permet de passer le tab au dessus de la page
+.md ion-router-outlet {
+  height: calc(var(--vh, 1vh) * 100);
+}
