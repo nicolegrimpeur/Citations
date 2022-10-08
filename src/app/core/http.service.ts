@@ -40,6 +40,7 @@ export class HttpService {
 
   isServerExisting(id): Observable<any> {
     const url = this.baseLink + 'isServer/' + id;
+    console.log(url);
     return this.http.get<any>(url);
   }
 }
