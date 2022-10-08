@@ -1,0 +1,31 @@
+ion-card {
+  @media screen and (min-width: 500px) {
+    width: 30vw;
+  }
+  @media screen and (max-width: 500px) {
+    width: 75vw;
+  }
+  margin: auto auto auto auto;
+  text-align: center;
+  opacity: 90%;
+  border-radius: 20px;
+}
+
+.firstCard {
+  margin-top: 10vh;
+}
+
+ion-card-content {
+  @media screen and (min-width: 500px) {
+    width: 25vw;
+  }
+  margin: auto;
+}
+
+ion-content {
+  --background: none;
+  background-image: url("../../assets/background/layered-waves-haikei.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
