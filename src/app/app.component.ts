@@ -32,5 +32,8 @@ export class AppComponent {
           this.router.navigate(['/home']).then();
         }
       })
+      .catch(() => {
+        this.router.navigate(['/login']).then();
+      });
   }
 }

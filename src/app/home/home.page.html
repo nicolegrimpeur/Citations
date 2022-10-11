@@ -1,20 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      {{nomServeur}}
+    </ion-title>
+
+    <ion-title slot="end">
+      <ion-icon #refresh name="refresh-outline" (click)="boutonRefresh()"></ion-icon>
     </ion-title>
   </ion-toolbar>
+
+
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content >
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger" (click)="deconnexion()">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+
+  <ion-card class="pasDeMessage" *ngIf="liste !== undefined && !liste.length">
+    <ion-card-header>
+      <ion-card-title>
+        Aucun message n'a été posté pour l'instant, n'hésitez pas à créer le premier !
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngFor="let message of liste">
+    <ion-card-content>
+      {{message}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>
