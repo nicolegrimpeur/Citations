@@ -34,6 +34,8 @@ export class LoginPage implements OnInit {
       .catch(err => {
         if (err.status === 409)
           this.display.display('Ce serveur n\'existe pas, merci de le créer').then();
+        else if (err.status === 0)
+          this.display.display('Serveur distant indisponible').then();
       });
   }
 
