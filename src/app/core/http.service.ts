@@ -38,9 +38,13 @@ export class HttpService {
     return this.http.get<any>(url);
   }
 
-  isServerExisting(id): Observable<any> {
-    const url = this.baseLink + 'isServer/' + id;
-    console.log(url);
+  isServeurExisting(id): Observable<any> {
+    const url = this.baseLink + 'isServeur/' + id;
+    return this.http.get<any>(url);
+  }
+
+  renameServeur(oldName, newName): Observable<any> {
+    const url = this.baseLink + 'renameServeur/' + oldName + '/' + newName;
     return this.http.get<any>(url);
   }
 }

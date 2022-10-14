@@ -1,25 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-button slot="start" fill="clear" color="dark" shape="round" (click)="editNomServeur()">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-button>
     <ion-title>
-      {{nomServeur}}
+      ឵឵ {{nomServeur}}
     </ion-title>
 
-    <ion-title slot="end">
-      <ion-icon #refresh name="refresh-outline" (click)="boutonRefresh()"></ion-icon>
-    </ion-title>
+    <ion-button slot="end" fill="clear" (click)="boutonRefresh()" color="tertiary" shape="round">
+      <ion-icon name="refresh" #refresh></ion-icon>
+    </ion-button>
+
+    <ion-button slot="end" fill="clear" (click)="supprimerServeur()" color="danger" shape="round">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button slot="end" fill="clear" color="warning" (click)="deconnexion()" shape="round">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 
 
 </ion-header>
 
-<ion-content >
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button color="danger" (click)="deconnexion()">
-      <ion-icon name="exit-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-
+<ion-content>
   <ion-card class="pasDeMessage" *ngIf="liste !== undefined && !liste.length">
     <ion-card-header>
       <ion-card-title>

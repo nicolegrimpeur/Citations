@@ -38,12 +38,13 @@ export class HomePage {
   getMessages() {
     lastValueFrom(this.httpService.getServeur(this.nomServeur))
       .then(res => {
-        console.log(res);
         this.liste = res.messages;
       })
       .catch(err => {
         if (err.status === 406)
           this.display.display('Le serveur n\'existe pas').then();
+        else if (err.status === 0)
+          this.display.display('Serveur distant indisponible').then();
         else
           this.display.display('Une erreur a eu lieu').then();
       })
@@ -65,12 +66,61 @@ export class HomePage {
     animation.play();
   }
 
-  deconnexion() {
-    this.storageService.setServeur('')
-      .then(() => {
-        this.router.navigate(['/login']).then(() => {
-          this.display.display({'code': 'Déconnexion réussi', 'color': 'success'}).then();
-        });
+  editNomServeur() {
+    this.display.alertWithInputs('Renommer le serveur', [
+      {
+        name: 'nom',
+        type: 'text',
+        placeholder: 'Nouveau nom'
+      }
+    ])
+      .then(res => {
+        if (res.role !== 'cancel')
+          lastValueFrom(this.httpService.renameServeur(this.nomServeur, res.data.values.nom))
+            .then(resultat => {
+              console.log(resultat)
+              this.storageService.setServeur(res.data.values.nom).then(() => {
+                this.nomServeur = res.data.values.nom;
+                this.display.display({'code': 'Serveur renommé', 'color': 'success'}).then();
+                this.boutonRefresh();
+              });
+
+            })
+            .catch(err => {
+              this.display.display('Une erreur a eu lieu').then();
+            })
       })
+  }
+
+  supprimerServeur() {
+    this.display.alertWithInputs("Etes-vous sur de vouloir vous supprimer ce serveur ?", [])
+      .then(res => {
+        if (res.role === 'ok')
+          lastValueFrom(this.httpService.suppServeur(this.nomServeur))
+            .then(res => {
+              this.storageService.setServeur('')
+                .then(() => {
+                  this.router.navigate(['/login']).then(() => {
+                    this.display.display({'code': 'Suppression réussi', 'color': 'success'}).then();
+                  });
+                })
+            })
+            .catch(() => {
+              this.display.display('Une erreur a eu lieu').then();
+            })
+      });
+  }
+
+  deconnexion() {
+    this.display.alertWithInputs("Etes-vous sur de vouloir vous déconnecter ?", [])
+      .then(res => {
+        if (res.role === 'ok')
+          this.storageService.setServeur('')
+            .then(() => {
+              this.router.navigate(['/login']).then(() => {
+                this.display.display({'code': 'Déconnexion réussi', 'color': 'success'}).then();
+              });
+            })
+      });
   }
 }

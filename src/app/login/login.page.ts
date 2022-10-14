@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   }
 
   clickRejoindre() {
-    lastValueFrom(this.httpService.isServerExisting(this.serveur))
+    lastValueFrom(this.httpService.isServeurExisting(this.serveur))
       .then(res => {
         this.storageService.setServeur(this.serveur).then(() => {
           this.router.navigateByUrl('/home').then();
@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
   }
 
   clickCreer() {
-    lastValueFrom(this.httpService.isServerExisting(this.newServeur))
+    lastValueFrom(this.httpService.isServeurExisting(this.newServeur))
       .then(res => {
         this.display.display('Ce serveur existe déjà').then();
       })

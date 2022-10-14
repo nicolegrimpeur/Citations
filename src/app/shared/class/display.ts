@@ -47,4 +47,25 @@ export class Display {
 
     await alert.present();
   }
+
+  async alertWithInputs(header: string, inputs) {
+    const alert = await this.alertController.create({
+      cssClass: 'alert',
+      header: header,
+      inputs: inputs,
+      buttons: [{
+        text: 'Annuler',
+        role: 'cancel'
+      }, {
+        text: 'Ok',
+        role: 'ok'
+      }]
+    });
+
+    // on affiche l'alerte
+    await alert.present();
+
+    // on attend que l'utilisateur supprime l'alerte
+    return await alert.onDidDismiss().then(result => result);
+  }
 }
