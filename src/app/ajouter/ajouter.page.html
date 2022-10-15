@@ -18,13 +18,13 @@
             <ion-col>
               <ion-item>
                 <ion-label>Nom</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-input type="text" [(ngModel)]="nom"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col>
               <ion-item>
                 <ion-label>Date</ion-label>
-                <ion-input type="date" value="2022-02-02" #dateSelect></ion-input>
+                <ion-input type="date" value="2022-02-02" #dateSelect [(ngModel)]="date"></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -32,7 +32,7 @@
             <ion-col>
               <ion-item>
                 <ion-label position="floating">Message</ion-label>
-                <ion-textarea type="text" [autoGrow]="true"></ion-textarea>
+                <ion-textarea type="text" [autoGrow]="true" [(ngModel)]="message"></ion-textarea>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -41,7 +41,7 @@
     </ion-card-content>
 
     <ion-card-content style="text-align: center">
-      <ion-button fill="clear" shape="round" color="dark">
+      <ion-button fill="clear" shape="round" color="dark" (click)="envoyer()">
         <ion-icon name="add-circle-outline" slot="start"></ion-icon>
         Envoyer
         <ion-icon name="add-circle-outline" slot="end"></ion-icon>

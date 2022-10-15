@@ -28,9 +28,9 @@ export class HttpService {
     return this.http.get<any>(url);
   }
 
-  addMessage(id): Observable<any> {
+  addMessage(id, data): Observable<any> {
     const url = this.baseLink + 'addMessage/' + id;
-    return this.http.get<any>(url);
+    return this.http.post<any>(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
   removeMessage(id, date): Observable<any> {

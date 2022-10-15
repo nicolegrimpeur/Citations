@@ -92,6 +92,21 @@ export class HomePage {
       })
   }
 
+  supprimerMessage(date) {
+    this.display.alertWithInputs("Etes-vous sur de vouloir vous supprimer ce message ?", [])
+      .then(res => {
+        if (res.role === 'ok')
+          lastValueFrom(this.httpService.removeMessage(this.nomServeur, date))
+            .then(res => {
+              this.getMessages();
+              this.display.display({'code': 'Suppression réussi', 'color': 'success'}).then();
+            })
+            .catch(() => {
+              this.display.display('Une erreur a eu lieu').then();
+            })
+      });
+  }
+
   supprimerServeur() {
     this.display.alertWithInputs("Etes-vous sur de vouloir vous supprimer ce serveur ?", [])
       .then(res => {

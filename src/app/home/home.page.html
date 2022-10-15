@@ -30,9 +30,22 @@
     </ion-card-header>
   </ion-card>
 
-  <ion-card *ngFor="let message of liste">
+  <ion-card *ngFor="let objet of liste">
+    <ion-fab horizontal="end" vertical="start">
+      <ion-fab-button color="medium" (click)="supprimerMessage(objet.date)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+<!--    <ion-button slot="end" fill="clear" (click)="boutonRefresh()" color="tertiary" shape="round">-->
+<!--      -->
+<!--    </ion-button>-->
+    <ion-card-header>
+      <ion-card-subtitle>
+        {{objet.auteur}}
+      </ion-card-subtitle>
+      <ion-card-title>{{objet.message}}</ion-card-title>
+    </ion-card-header>
     <ion-card-content>
-      {{message}}
     </ion-card-content>
   </ion-card>
 </ion-content>
