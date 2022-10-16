@@ -7,21 +7,34 @@
       ឵឵ {{nomServeur}}
     </ion-title>
 
-    <ion-button slot="end" fill="clear" (click)="boutonRefresh()" color="tertiary" shape="round">
-      <ion-icon name="refresh" #refresh></ion-icon>
-    </ion-button>
-
-    <ion-button slot="end" fill="clear" (click)="supprimerServeur()" color="danger" shape="round">
-      <ion-icon name="trash-outline"></ion-icon>
-    </ion-button>
-
-    <ion-button slot="end" fill="clear" color="warning" (click)="deconnexion()" shape="round">
-      <ion-icon name="exit-outline"></ion-icon>
-    </ion-button>
+<!--    <ion-fab horizontal="end" vertical="top" slot="fixed" edge="true">-->
+    <ion-fab vertical="top" horizontal="end" style="margin-top: -10px">
+      <ion-fab-button color="medium">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="start">
+        <ion-fab-button color="danger" (click)="supprimerServeur()" title="Supprimer le serveur">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button color="warning" (click)="deconnexion()" title="Se déconnecter">
+          <ion-icon name="exit-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button color="tertiary" (click)="getMessages()" title="Rafraichir la page">
+          <ion-icon name="refresh"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <!-- slide refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+
   <ion-card class="pasDeMessage" *ngIf="liste !== undefined && !liste.length">
     <ion-card-header>
       <ion-card-title>
@@ -32,13 +45,11 @@
 
   <ion-card *ngFor="let objet of liste">
     <ion-fab horizontal="end" vertical="start">
-      <ion-fab-button color="medium" (click)="supprimerMessage(objet.date)">
+      <ion-fab-button color="medium" (click)="supprimerMessage(objet.date)" class="boutonSupp">
         <ion-icon name="trash-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-<!--    <ion-button slot="end" fill="clear" (click)="boutonRefresh()" color="tertiary" shape="round">-->
-<!--      -->
-<!--    </ion-button>-->
+
     <ion-card-header>
       <ion-card-subtitle>
         {{objet.auteur}}

@@ -5,7 +5,6 @@ import {lastValueFrom} from "rxjs";
 import {Display} from "../shared/class/display";
 import {MessageModel} from "../shared/models/message.model";
 import {Router} from "@angular/router";
-import {Animation, AnimationController} from "@ionic/angular";
 
 @Component({
   selector: 'app-home',
@@ -22,8 +21,7 @@ export class HomePage {
     private storageService: StorageService,
     private httpService: HttpService,
     private display: Display,
-    private router: Router,
-    private animationCtrl: AnimationController
+    private router: Router
   ) {
     this.storageService.getServeur()
       .then(res => {
@@ -50,22 +48,6 @@ export class HomePage {
       })
   }
 
-  boutonRefresh() {
-    this.lanceAnimation();
-    this.getMessages();
-  }
-
-  lanceAnimation() {
-    const animation: Animation = this.animationCtrl.create()
-      .addElement(this.refreshElement.el)
-      .duration(1000)
-      .iterations(2)
-      .fromTo('transform', 'rotate(0deg)', 'rotate(360deg)');
-    // .fromTo('transform', 'translateX(0px)', 'translateX(-100px)');
-
-    animation.play();
-  }
-
   editNomServeur() {
     this.display.alertWithInputs('Renommer le serveur', [
       {
@@ -82,7 +64,7 @@ export class HomePage {
               this.storageService.setServeur(res.data.values.nom).then(() => {
                 this.nomServeur = res.data.values.nom;
                 this.display.display({'code': 'Serveur renommé', 'color': 'success'}).then();
-                this.boutonRefresh();
+                this.getMessages();
               });
 
             })
@@ -137,5 +119,16 @@ export class HomePage {
               });
             })
       });
+  }
+
+  // événement pour rafraichir la page
+  doRefresh(event) {
+    // rafraichi les messages
+    this.getMessages();
+
+    setTimeout(() => {
+      // permet de terminer l'animation
+      event.target.complete();
+    }, 1000);
   }
 }
