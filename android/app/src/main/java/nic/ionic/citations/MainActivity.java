@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package nic.ionic.citations;
 
 import com.getcapacitor.BridgeActivity;
 

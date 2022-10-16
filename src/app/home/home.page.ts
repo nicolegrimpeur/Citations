@@ -5,6 +5,8 @@ import {lastValueFrom} from "rxjs";
 import {Display} from "../shared/class/display";
 import {MessageModel} from "../shared/models/message.model";
 import {Router} from "@angular/router";
+import {App} from '@capacitor/app';
+import {Platform} from "@ionic/angular";
 
 @Component({
   selector: 'app-home',
@@ -18,11 +20,24 @@ export class HomePage {
   public liste: Array<MessageModel>;
 
   constructor(
+    public platform: Platform,
     private storageService: StorageService,
     private httpService: HttpService,
     private display: Display,
     private router: Router
   ) {
+    // gestion de la touche mobile back
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      // si l'on est sur la page principale, on quitte l'application
+      if (this.router.url === '/home' || this.router.url === '/login') {
+        App.exitApp().then();
+      } else if (this.router.url === '/ajouter') {  // si on est sur la page de liste, on va sur la page principale
+        this.router.navigate(['/home']).then();
+      } else {  // sinon c'est que l'on est sur la page de login donc on peut quitter l'appli
+        App.exitApp().then();
+      }
+    });
+
     this.storageService.getServeur()
       .then(res => {
         this.nomServeur = res;
