@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">citations</string>
-    <string name="title_activity_main">citations</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">Citations</string>
+    <string name="title_activity_main">Citations</string>
+    <string name="package_name">nic.ionic.citations</string>
+    <string name="custom_url_scheme">nic.ionic.citations</string>
 </resources>
