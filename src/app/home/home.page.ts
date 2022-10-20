@@ -59,7 +59,7 @@ export class HomePage {
         else if (err.status === 0)
           this.display.display('Serveur distant indisponible').then();
         else
-          this.display.display('Une erreur a eu lieu').then();
+          this.router.navigate(['/login']).then();
       })
   }
 

@@ -24,15 +24,21 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  initVar() {
+    this.serveur = '';
+    this.newServeur = '';
+  }
+
   clickRejoindre() {
     lastValueFrom(this.httpService.isServeurExisting(this.serveur))
       .then(res => {
         this.storageService.setServeur(this.serveur).then(() => {
           this.router.navigateByUrl('/home').then();
+          this.initVar();
         });
       })
       .catch(err => {
-        if (err.status === 409)
+        if (err.status === 406)
           this.display.display('Ce serveur n\'existe pas, merci de le créer').then();
         else if (err.status === 0)
           this.display.display('Serveur distant indisponible').then();
@@ -45,14 +51,15 @@ export class LoginPage implements OnInit {
         this.display.display('Ce serveur existe déjà').then();
       })
       .catch(err => {
-        if (err.status === 409)
+        if (err.status === 406)
           lastValueFrom(this.httpService.initServeur(this.newServeur))
             .then(res => {
               this.display.display({'code': 'Création réussi', 'color': 'success'}).then();
 
               // stockage du nom de serveur et connexion
-              this.storageService.setServeur(this.serveur).then(() => {
+              this.storageService.setServeur(this.newServeur).then(() => {
                 this.router.navigateByUrl('/home').then();
+                this.initVar();
               });
             })
             .catch(err => {
