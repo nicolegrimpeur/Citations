@@ -16,15 +16,17 @@ ion-card {
 
 .boutonSupp {
   @media screen and (min-width: 500px) {
-    margin-top: 1vw;
-    width: 3vw;
-    height: 3vw;
-    line-height: 3vw;
+    $taille: 3vw;
+    width: $taille;
+    height: $taille;
+    line-height: $taille;
   }
   @media screen and (max-width: 500px) {
-    margin-top: 1vh;
-    width: 5vh;
-    height: 5vh;
-    line-height: 5vh;
+    $taille: 9vw;
+    width: $taille;
+    height: $taille;
+    line-height: $taille;
   }
+
+  margin-top: 1vw;
 }

@@ -6,7 +6,7 @@
     <ion-card-content>
       <ion-item>
         <ion-label position="floating">Nom du serveur</ion-label>
-        <ion-input type="search" [(ngModel)]="serveur"></ion-input>
+        <ion-input type="search" [(ngModel)]="serveur" (keyup.enter)="clickRejoindre()"></ion-input>
       </ion-item>
       <br>
       <ion-button shape="round" (click)="clickRejoindre()">Entrer</ion-button>
@@ -22,7 +22,7 @@
     <ion-card-content>
       <ion-item>
         <ion-label position="floating">Nom du serveur</ion-label>
-        <ion-input type="search" [(ngModel)]="newServeur"></ion-input>
+        <ion-input type="search" [(ngModel)]="newServeur" (keyup.enter)="clickCreer()"></ion-input>
       </ion-item>
       <br>
       <ion-button shape="round" (click)="clickCreer()">Créer</ion-button>

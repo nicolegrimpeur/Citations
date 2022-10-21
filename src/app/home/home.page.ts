@@ -26,41 +26,34 @@ export class HomePage {
     private display: Display,
     private router: Router
   ) {
-    // gestion de la touche mobile back
-    this.platform.backButton.subscribeWithPriority(-1, () => {
-      // si l'on est sur la page principale, on quitte l'application
-      if (this.router.url === '/home' || this.router.url === '/login') {
-        App.exitApp().then();
-      } else if (this.router.url === '/ajouter') {  // si on est sur la page de liste, on va sur la page principale
-        this.router.navigate(['/home']).then();
-      } else {  // sinon c'est que l'on est sur la page de login donc on peut quitter l'appli
-        App.exitApp().then();
-      }
-    });
-
     this.storageService.getServeur()
       .then(res => {
-        this.nomServeur = res;
-        this.getMessages();
+        if (res === '' || res === null)
+          this.router.navigate(['/login']).then();
+        else {
+          this.nomServeur = res;
+          this.getMessages();
+        }
       })
       .catch(() => {
         this.nomServeur = '';
+        this.router.navigate(['/login']).then();
       })
   }
 
   getMessages() {
-    lastValueFrom(this.httpService.getServeur(this.nomServeur))
-      .then(res => {
-        this.liste = res.messages;
-      })
-      .catch(err => {
-        if (err.status === 406)
-          this.display.display('Le serveur n\'existe pas').then();
-        else if (err.status === 0)
-          this.display.display('Serveur distant indisponible').then();
-        else
-          this.router.navigate(['/login']).then();
-      })
+      lastValueFrom(this.httpService.getServeur(this.nomServeur))
+        .then(res => {
+          this.liste = res.messages;
+        })
+        .catch(err => {
+          if (err.status === 406)
+            this.display.display('Le serveur n\'existe pas').then();
+          else if (err.status === 0)
+            this.display.display('Serveur distant indisponible').then();
+          else
+            this.router.navigate(['/login']).then();
+        })
   }
 
   editNomServeur() {
