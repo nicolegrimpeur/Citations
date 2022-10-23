@@ -46,10 +46,6 @@ export class AjouterPage implements OnInit {
   }
 
   envoyer() {
-    console.log(this.message);
-    console.log(this.nom);
-    console.log(this.date);
-
     const objMessage: MessageModel = {
       date: Date.now().toString(),
       message: this.message,

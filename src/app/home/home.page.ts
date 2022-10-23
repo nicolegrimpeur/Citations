@@ -44,7 +44,7 @@ export class HomePage {
   getMessages() {
       lastValueFrom(this.httpService.getServeur(this.nomServeur))
         .then(res => {
-          this.liste = res.messages;
+          this.liste = res.messages.reverse();
         })
         .catch(err => {
           if (err.status === 406)
