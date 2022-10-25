@@ -12,7 +12,7 @@ ion-card {
 }
 
 .firstCard {
-  margin-top: 10vh;
+  margin-top: 5vh;
 }
 
 ion-card-content {
@@ -28,4 +28,8 @@ ion-content {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+ion-item::part(native) {
+  background-color: inherit;
 }

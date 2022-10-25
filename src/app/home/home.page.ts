@@ -5,8 +5,6 @@ import {lastValueFrom} from "rxjs";
 import {Display} from "../shared/class/display";
 import {MessageModel} from "../shared/models/message.model";
 import {Router} from "@angular/router";
-import {App} from '@capacitor/app';
-import {Platform} from "@ionic/angular";
 
 @Component({
   selector: 'app-home',
@@ -20,12 +18,14 @@ export class HomePage {
   public liste: Array<MessageModel>;
 
   constructor(
-    public platform: Platform,
     private storageService: StorageService,
     private httpService: HttpService,
     private display: Display,
     private router: Router
   ) {
+  }
+
+  ionViewWillEnter() {
     this.storageService.getServeur()
       .then(res => {
         if (res === '' || res === null)
@@ -42,18 +42,18 @@ export class HomePage {
   }
 
   getMessages() {
-      lastValueFrom(this.httpService.getServeur(this.nomServeur))
-        .then(res => {
-          this.liste = res.messages.reverse();
-        })
-        .catch(err => {
-          if (err.status === 406)
-            this.display.display('Le serveur n\'existe pas').then();
-          else if (err.status === 0)
-            this.display.display('Serveur distant indisponible').then();
-          else
-            this.router.navigate(['/login']).then();
-        })
+    lastValueFrom(this.httpService.getServeur(this.nomServeur))
+      .then(res => {
+        this.liste = res.messages.reverse();
+      })
+      .catch(err => {
+        if (err.status === 406)
+          this.display.display('Le serveur n\'existe pas').then();
+        else if (err.status === 0)
+          this.display.display('Serveur distant indisponible').then();
+        else
+          this.router.navigate(['/login']).then();
+      })
   }
 
   editNomServeur() {
@@ -68,7 +68,6 @@ export class HomePage {
         if (res.role !== 'cancel')
           lastValueFrom(this.httpService.renameServeur(this.nomServeur, res.data.values.nom))
             .then(resultat => {
-              console.log(resultat)
               this.storageService.setServeur(res.data.values.nom).then(() => {
                 this.nomServeur = res.data.values.nom;
                 this.display.display({'code': 'Serveur renommé', 'color': 'success'}).then();

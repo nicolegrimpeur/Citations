@@ -24,6 +24,11 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewDidEnter() {
+    const div = document.getElementsByClassName('item-native');
+    console.log(div);
+  }
+
   initVar() {
     this.serveur = '';
     this.newServeur = '';
@@ -33,7 +38,8 @@ export class LoginPage implements OnInit {
     lastValueFrom(this.httpService.isServeurExisting(this.serveur))
       .then(res => {
         this.storageService.setServeur(this.serveur).then(() => {
-          this.router.navigateByUrl('/home').then();
+          this.router.navigate(['/home']).then();
+          window.location.reload();
           this.initVar();
         });
       })
