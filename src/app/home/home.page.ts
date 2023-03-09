@@ -16,6 +16,7 @@ export class HomePage {
 
   public nomServeur: string;
   public liste: Array<MessageModel>;
+  public favoris: Array<string>;
 
   constructor(
     private storageService: StorageService,
@@ -23,9 +24,10 @@ export class HomePage {
     private display: Display,
     private router: Router
   ) {
+    this.favoris = [];
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     this.storageService.getServeur()
       .then(res => {
         if (res === '' || res === null)
@@ -38,7 +40,39 @@ export class HomePage {
       .catch(() => {
         this.nomServeur = '';
         this.router.navigate(['/login']).then();
-      })
+      });
+
+    this.favoris = await this.storageService.getFavoris();
+
+    if (this.favoris === null) {
+      this.favoris = [];
+      this.storageService.setFavoris(this.favoris).then();
+    }
+  }
+
+  clickFavoris() {
+    if (!this.favoris.includes(this.nomServeur)) {
+      this.favoris.push(this.nomServeur);
+      this.storageService.setFavoris(this.favoris)
+        .then(() => {
+          this.display.display({'code': 'Serveur ajouté aux favoris', 'color': 'success'}).then();
+        })
+        .catch(() => {
+          this.display.display('Une erreur a eu lieu').then();
+        });
+    } else {
+      this.favoris = this.favoris.filter(favori => favori !== this.nomServeur);
+      this.storageService.setFavoris(this.favoris)
+        .then(() => {
+          this.display.display({'code': 'Serveur supprimé des favoris', 'color': 'success'}).then();
+        })
+        .catch(() => {
+          this.display.display('Une erreur a eu lieu').then();
+        });
+    }
+
+
+
   }
 
   getMessages() {

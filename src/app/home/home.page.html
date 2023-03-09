@@ -22,6 +22,9 @@
         <ion-fab-button color="tertiary" (click)="getMessages()" title="Rafraichir la page">
           <ion-icon name="refresh"></ion-icon>
         </ion-fab-button>
+        <ion-fab-button color="danger" (click)="clickFavoris()" title="{{favoris?.includes(nomServeur) ? 'Ajouter à mes favoris' : 'Retirer de mes favoris'}}">
+          <ion-icon name="{{favoris?.includes(nomServeur) ? 'heart' : 'heart-outline'}}"></ion-icon>
+        </ion-fab-button>
       </ion-fab-list>
     </ion-fab>
   </ion-toolbar>

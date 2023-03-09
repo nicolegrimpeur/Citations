@@ -30,4 +30,17 @@
   </ion-card>
 
   <br>
+
+  <ion-card *ngIf="favoris">
+    <ion-card-header>
+      <ion-card-title>Liste des favoris</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let favori of favoris.reverse()" class="ion-text-center" (click)="clickRejoindre(favori)">
+          <ion-label>{{favori}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

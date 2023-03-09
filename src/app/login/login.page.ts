@@ -13,6 +13,7 @@ import {Router} from "@angular/router";
 export class LoginPage implements OnInit {
   public serveur: string;
   public newServeur: string;
+  public favoris: Array<string>;
 
   constructor(
     private httpService: HttpService,
@@ -24,9 +25,8 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewDidEnter() {
-    const div = document.getElementsByClassName('item-native');
-    console.log(div);
+  async ionViewDidEnter() {
+    this.favoris = await this.storageService.getFavoris();
   }
 
   initVar() {
@@ -34,10 +34,13 @@ export class LoginPage implements OnInit {
     this.newServeur = '';
   }
 
-  clickRejoindre() {
-    lastValueFrom(this.httpService.isServeurExisting(this.serveur))
+  clickRejoindre(serveur: string = '') {
+    if (serveur === '')
+      serveur = this.serveur;
+
+    lastValueFrom(this.httpService.isServeurExisting(serveur))
       .then(res => {
-        this.storageService.setServeur(this.serveur).then(() => {
+        this.storageService.setServeur(serveur).then(() => {
           this.router.navigate(['/home']).then();
           window.location.reload();
           this.initVar();
