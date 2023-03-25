@@ -1,0 +1,25 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      Ajouter des participants
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-item>
+      <ion-label position="floating" color="medium">Prénom</ion-label>
+      <ion-input type="text" [(ngModel)]="nom" (keydown)="keyDownFunction($event)"></ion-input>
+    </ion-item>
+    <ion-button expand="block" color="medium" (click)="addParticipant()">Ajouter</ion-button>
+  </ion-card-content>
+  <ion-card-content *ngIf="participants.length > 0">
+    <ion-card-title>Liste</ion-card-title>
+    <ion-list>
+      <ion-item *ngFor="let participant of participants">
+        <ion-button fill="clear" slot="start" (click)="removeParticipant(participant)" color="medium">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+        <ion-label>{{participant}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

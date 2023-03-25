@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: () => import('../ajouter/ajouter.module').then(m => m.AjouterPageModule)
       },
       {
+        path: 'roulette',
+        loadChildren: () => import('../roulette/roulette.module').then(m => m.RoulettePageModule)
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'

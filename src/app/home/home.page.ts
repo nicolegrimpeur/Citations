@@ -70,9 +70,6 @@ export class HomePage {
           this.display.display('Une erreur a eu lieu').then();
         });
     }
-
-
-
   }
 
   getMessages() {

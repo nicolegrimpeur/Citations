@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Citations roulette !</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="clickButton()">
+        <ion-icon slot="icon-only" [name]="enJeu ? 'stop' : 'play'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-enregistrement *ngIf="!enJeu" [listeParticipants]="participants" #enregistrementComponent></app-enregistrement>
+  <app-jeu *ngIf="enJeu" [listeParticipants]="participants"></app-jeu>
+</ion-content>
