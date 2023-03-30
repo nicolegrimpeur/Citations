@@ -49,8 +49,8 @@ export class AjouterPage implements OnInit {
     const objMessage: MessageModel = {
       date: Date.now().toString(),
       message: this.message,
-      auteur: this.nom + ' ' + this.date.match(/[0-9]{4}/g)[0].replace('0', 'k')
-    }
+      auteur: this.nom
+    };
 
     lastValueFrom(this.httpService.addMessage(this.nomServeur, objMessage))
       .then(res => {
