@@ -5,10 +5,10 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class Display {
-  private toastController: ToastController = new ToastController();
-  private alertController: AlertController = new AlertController();
-
-  constructor() {
+  constructor(
+    private toastController: ToastController,
+    private alertController: AlertController
+  ) {
   }
 
   // affiche d'un toast contenant le texte de l'erreur
