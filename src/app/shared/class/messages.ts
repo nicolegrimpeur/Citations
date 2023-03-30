@@ -16,19 +16,16 @@ export class Messages {
   public listeMessages: Array<MessageModel> = [];
 
   constructor(
+    nomServeur: string,
     private storageService: StorageService,
     private httpService: HttpService,
     private display: Display,
     private router: Router) {
-  }
-
-  setNomServeur(nomServeur: string) {
     this.nomServeur = nomServeur;
-    this.getListeMessages().then();
   }
 
   async getListeMessages() {
-    lastValueFrom(this.httpService.getServeur(this.nomServeur))
+    await lastValueFrom(this.httpService.getServeur(this.nomServeur))
       .then(res => {
         this.listeMessages = res.messages.reverse();
       })

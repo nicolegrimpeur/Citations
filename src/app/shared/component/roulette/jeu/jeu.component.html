@@ -4,14 +4,22 @@
       Qui l'a dit ?
     </ion-card-title>
   </ion-card-header>
+  <ion-card-content>
+    <ion-item>
+      {{listeMessages[compteur]?.message}}
+    </ion-item>
+  </ion-card-content>
   <ion-card-content *ngIf="participants.length > 1">
-    <ion-card-title>Liste</ion-card-title>
+    <ion-card-title>Qui a eu bon ?</ion-card-title>
     <ion-list>
-      <ion-item *ngFor="let participant of participants">
-        <ion-label>
-          {{participant}}
-        </ion-label>
+      <ion-item *ngFor="let participant of listeParticipants">
+        <ion-checkbox justify="space-between" color="medium" (ionChange)="modifyPoints($event, participant)">
+          {{participant.points}} points, {{participant.nom}}
+        </ion-checkbox>
       </ion-item>
     </ion-list>
+  </ion-card-content>
+  <ion-card-content>
+    <ion-button expand="block" color="medium" (click)="suivant()">Suivant</ion-button>
   </ion-card-content>
 </ion-card>
