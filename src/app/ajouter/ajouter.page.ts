@@ -38,11 +38,12 @@ export class AjouterPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    const date = new Date(Date.now());
-    this.dateSelect.el.value =
-      date.getFullYear() + '-' +
-      ((date.getMonth() < 10) ? '0' + date.getMonth() : date.getMonth()) + '-' +
-      ((date.getDate() < 10) ? '0' + date.getDate() : date.getDate());
+    // const date = new Date(Date.now());
+    // this.dateSelect.el.value =
+    //   date.getFullYear() + '-' +
+    //   // ((date.getMonth() < 10) ? '0' + date.getMonth() : date.getMonth()) + '-' +
+    //   date.getMonth() + '-' +
+    //   ((date.getDate() < 10) ? '0' + date.getDate() : date.getDate());
   }
 
   envoyer() {

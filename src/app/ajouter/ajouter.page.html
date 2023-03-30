@@ -17,22 +17,26 @@
           <ion-row>
             <ion-col size="12" size-sm="6">
               <ion-item>
-                <ion-label>Nom</ion-label>
-                <ion-input type="text" [(ngModel)]="nom"></ion-input>
+                <ion-input type="text" [(ngModel)]="nom" label="Nom"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size="12" size-sm="6">
               <ion-item>
-                <ion-label>Date</ion-label>
-                <ion-input type="date" value="2022-02-02" #dateSelect [(ngModel)]="date"></ion-input>
+<!--                <ion-input type="date" value="2022-02-02" #dateSelect [(ngModel)]="date" label="Date"></ion-input>-->
+                <ion-datetime-button datetime="dateCitation" color="medium"></ion-datetime-button>
+
+                <ion-popover [keepContentsMounted]="true">
+                  <ng-template>
+                    <ion-datetime id="dateCitation" presentation="date" color="medium"></ion-datetime>
+                  </ng-template>
+                </ion-popover>
               </ion-item>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
               <ion-item>
-                <ion-label position="floating">Message</ion-label>
-                <ion-textarea type="text" [autoGrow]="true" [(ngModel)]="message"></ion-textarea>
+                <ion-textarea label="Message" labelPlacement="floating" type="text" [autoGrow]="true" [(ngModel)]="message"></ion-textarea>
               </ion-item>
             </ion-col>
           </ion-row>

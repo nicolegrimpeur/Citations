@@ -6,7 +6,8 @@
   </ion-card-header>
   <ion-card-content>
     <ion-item>
-      <ion-input class="input" type="text" [(ngModel)]="nom" (keydown)="keyDownFunction($event)" label="Prénom" labelPlacement="floating"></ion-input>
+      <ion-input class="input" type="text" [(ngModel)]="nom" (keydown)="keyDownFunction($event)"
+                 label="Prénom" labelPlacement="floating"></ion-input>
     </ion-item>
     <ion-button expand="block" color="medium" (click)="addParticipant()">Ajouter</ion-button>
   </ion-card-content>
