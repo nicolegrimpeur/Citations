@@ -27,6 +27,9 @@ export class LoginPage implements OnInit {
 
   async ionViewDidEnter() {
     this.favoris = await this.storageService.getFavoris();
+
+    if (this.favoris)
+      this.favoris.reverse()
   }
 
   initVar() {
@@ -66,6 +69,7 @@ export class LoginPage implements OnInit {
               this.display.display({'code': 'Création réussi', 'color': 'success'}).then();
 
               // stockage du nom de serveur et connexion
+              console.log(this.newServeur)
               this.storageService.setServeur(this.newServeur).then(() => {
                 this.router.navigateByUrl('/home').then();
                 this.initVar();

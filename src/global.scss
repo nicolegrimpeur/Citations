@@ -50,3 +50,7 @@ ion-card {
   border-radius: 20px;
   margin: 1vh auto auto;
 }
+
+ion-input {
+  --highlight-color-valid: var(--ion-color-dark) !important;
+}

@@ -27,10 +27,10 @@ export class HomePage {
     private router: Router,
   ) {
     this.favoris = [];
-    this.serveur = new Serveur(storageService, httpService, display, router);
+    this.serveur = new Serveur(this.storageService, this.httpService, this.display, this.router);
     this.serveur.initNomServeur()
       .then(res => {
-        this.messages = new Messages(storageService, httpService, display, router);
+        this.messages = new Messages(this.storageService, this.httpService, this.display, this.router);
         this.messages.setNomServeur(res);
         this.messages.getListeMessages().then();
         this.initFavoris().then();
@@ -82,6 +82,9 @@ export class HomePage {
               this.router.navigate(['/login']).then(() => {
                 this.display.display({'code': 'Déconnexion réussi', 'color': 'success'}).then();
               });
+              this.favoris = [];
+              this.serveur = new Serveur(this.storageService, this.httpService, this.display, this.router);
+              this.messages = new Messages(this.storageService, this.httpService, this.display, this.router);
             })
       });
   }
