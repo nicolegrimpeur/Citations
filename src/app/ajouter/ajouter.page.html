@@ -21,25 +21,23 @@
               </ion-item>
             </ion-col>
             <ion-col size="12" size-sm="6">
-              <ion-item>
-<!--                <ion-input type="date" value="2022-02-02" #dateSelect [(ngModel)]="date" label="Date"></ion-input>-->
+              <ion-item id="dateItem">
+                <ion-label slot="start">Date :</ion-label>
                 <ion-datetime-button datetime="dateCitation" color="medium"></ion-datetime-button>
 
-                <ion-popover [keepContentsMounted]="true">
+                <ion-popover [keepContentsMounted]="true" trigger="dateItem">
                   <ng-template>
-                    <ion-datetime id="dateCitation" presentation="date" color="medium"></ion-datetime>
+                    <ion-datetime id="dateCitation" presentation="date" color="medium"
+                                  [(ngModel)]="date"></ion-datetime>
                   </ng-template>
                 </ion-popover>
               </ion-item>
             </ion-col>
           </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-textarea label="Message" labelPlacement="floating" type="text" [autoGrow]="true" [(ngModel)]="message"></ion-textarea>
-              </ion-item>
-            </ion-col>
-          </ion-row>
+          <ion-item>
+            <ion-textarea label="Message" labelPlacement="floating" type="text" [autoGrow]="true" [(ngModel)]="message"
+                          class="input"></ion-textarea>
+          </ion-item>
         </ion-grid>
       </ion-list>
     </ion-card-content>

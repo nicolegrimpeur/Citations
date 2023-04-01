@@ -4,3 +4,7 @@ ion-tab-bar.md {
   width: 92%;
   margin: 20px auto;
 }
+
+ion-tab-button {
+  --color-selected: var(--ion-color-dark);
+}

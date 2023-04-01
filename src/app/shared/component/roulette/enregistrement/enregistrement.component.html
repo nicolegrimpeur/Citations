@@ -9,7 +9,7 @@
       <ion-input class="input" type="text" [(ngModel)]="nom" (keydown)="keyDownFunction($event)"
                  label="Prénom" labelPlacement="floating"></ion-input>
     </ion-item>
-    <ion-button expand="block" color="medium" (click)="addParticipant()">Ajouter</ion-button>
+    <ion-button expand="block" color="medium" (click)="addParticipant()" [disabled]="nom === ''">Ajouter</ion-button>
   </ion-card-content>
   <ion-card-content *ngIf="participants.length > 0">
     <ion-card-title>Liste</ion-card-title>

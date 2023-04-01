@@ -20,6 +20,7 @@ export class JeuComponent implements OnInit {
   public listeMessages: Array<MessageModel> = [];
   public messages: Messages;
   public listeParticipants: Array<{ nom: string, points: number }> = [];
+  public afficheResultat: boolean = false;
 
   constructor(
     private storageService: StorageService,
@@ -34,7 +35,6 @@ export class JeuComponent implements OnInit {
         this.messages.getListeMessages()
           .then(res => {
             this.listeMessages = arrayShuffle(this.messages.listeMessages);
-            console.log(this.listeMessages)
           });
       });
   }
@@ -55,6 +55,12 @@ export class JeuComponent implements OnInit {
 
   suivant() {
     this.compteur++;
+    this.afficheResultat = false;
+
+    const tabCheckboxes = document.querySelectorAll('ion-checkbox');
+    tabCheckboxes.forEach(checkbox => {
+      checkbox['checked'] = false;
+    });
 
     if (this.compteur >= this.listeMessages.length) {
       this.listeMessages = arrayShuffle(this.listeMessages);

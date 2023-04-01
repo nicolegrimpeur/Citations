@@ -16,8 +16,10 @@ export class EnregistrementComponent implements OnInit {
   }
 
   addParticipant() {
-    this.participants.push(this.nom);
-    this.nom = '';
+    if (this.nom !== '') {
+      this.participants.push(this.nom);
+      this.nom = '';
+    }
   }
 
   removeParticipant(participant: string) {
