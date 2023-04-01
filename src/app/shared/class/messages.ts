@@ -28,6 +28,9 @@ export class Messages {
     await lastValueFrom(this.httpService.getServeur(this.nomServeur))
       .then(res => {
         this.listeMessages = res.messages.reverse();
+        this.listeMessages.sort((a, b) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
       })
       .catch(err => {
         if (err.status === 406)
