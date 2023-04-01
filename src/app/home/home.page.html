@@ -1,26 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-button slot="start" fill="clear" color="dark" shape="round" (click)="editNomServeur()">
+    <ion-button slot="start" fill="clear" color="dark" shape="round" (click)="serveur.editNomServeur()">
       <ion-icon name="create-outline"></ion-icon>
     </ion-button>
     <ion-title>
-      ឵឵ {{nomServeur}}
+      ឵឵ {{serveur.nomServeur}}
     </ion-title>
 
-<!--    <ion-fab horizontal="end" vertical="top" slot="fixed" edge="true">-->
     <ion-fab vertical="top" horizontal="end" style="margin-top: -10px">
       <ion-fab-button color="medium">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-list side="start">
-        <ion-fab-button color="danger" (click)="supprimerServeur()" title="Supprimer le serveur">
+        <ion-fab-button color="danger" (click)="serveur.supprimerServeur()" title="Supprimer le serveur">
           <ion-icon name="trash-outline"></ion-icon>
         </ion-fab-button>
         <ion-fab-button color="warning" (click)="deconnexion()" title="Se déconnecter">
           <ion-icon name="exit-outline"></ion-icon>
         </ion-fab-button>
-        <ion-fab-button color="tertiary" (click)="getMessages()" title="Rafraichir la page">
+        <ion-fab-button color="tertiary" (click)="messages.getListeMessages()" title="Rafraichir la page">
           <ion-icon name="refresh"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button color="danger" (click)="clickFavoris()"
+                        title="{{favoris?.includes(serveur.nomServeur) ? 'Ajouter à mes favoris' : 'Retirer de mes favoris'}}">
+          <ion-icon name="{{favoris?.includes(serveur.nomServeur) ? 'heart' : 'heart-outline'}}"></ion-icon>
         </ion-fab-button>
       </ion-fab-list>
     </ion-fab>
@@ -34,8 +37,7 @@
   </ion-refresher>
 
 
-
-  <ion-card class="pasDeMessage" *ngIf="liste !== undefined && !liste.length">
+  <ion-card class="pasDeMessage" *ngIf="messages !== undefined && messages.listeMessages !== undefined && !messages.listeMessages.length">
     <ion-card-header>
       <ion-card-title>
         Aucun message n'a été posté pour l'instant, n'hésitez pas à créer le premier !
@@ -43,22 +45,24 @@
     </ion-card-header>
   </ion-card>
 
-  <ion-card *ngFor="let objet of liste">
-    <ion-fab horizontal="end" vertical="start">
-      <ion-fab-button color="medium" (click)="supprimerMessage(objet.date)" class="boutonSupp">
-        <ion-icon name="trash-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+  <ng-container *ngIf="messages !== undefined">
+    <ion-card *ngFor="let objet of messages.listeMessages">
+      <ion-fab horizontal="end" vertical="start">
+        <ion-fab-button color="medium" (click)="messages.supprimerMessage(objet.date)" class="boutonSupp">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
 
-    <ion-card-header>
-      <ion-card-subtitle>
-        {{objet.auteur}}
-      </ion-card-subtitle>
-      <ion-card-title>{{objet.message}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-    </ion-card-content>
-  </ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>
+          {{objet.auteur}} : {{objet.date | date:'dd/MM/yyyy à HH:mm'}}
+        </ion-card-subtitle>
+        <ion-card-title>{{objet.message}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
 
   <section></section>
 </ion-content>

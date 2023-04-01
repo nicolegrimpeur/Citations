@@ -5,8 +5,8 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label position="floating">Nom du serveur</ion-label>
-        <ion-input type="search" [(ngModel)]="serveur" (keyup.enter)="clickRejoindre()"></ion-input>
+        <ion-input type="search" [(ngModel)]="serveur" (keyup.enter)="clickRejoindre()"
+                   label="Nom du serveur" label-placement="floating"></ion-input>
       </ion-item>
       <br>
       <ion-button shape="round" (click)="clickRejoindre()">Entrer</ion-button>
@@ -21,8 +21,8 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label position="floating">Nom du serveur</ion-label>
-        <ion-input type="search" [(ngModel)]="newServeur" (keyup.enter)="clickCreer()"></ion-input>
+        <ion-input type="search" [(ngModel)]="newServeur" (keyup.enter)="clickCreer()"
+                   label="Nom du serveur" label-placement="floating"></ion-input>
       </ion-item>
       <br>
       <ion-button shape="round" (click)="clickCreer()">Créer</ion-button>
@@ -30,4 +30,17 @@
   </ion-card>
 
   <br>
+
+  <ion-card *ngIf="favoris">
+    <ion-card-header>
+      <ion-card-title>Liste des favoris</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let favori of favoris" class="ion-text-center" (click)="clickRejoindre(favori)">
+          <ion-label>{{favori}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

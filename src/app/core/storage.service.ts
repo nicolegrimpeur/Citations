@@ -20,4 +20,16 @@ export class StorageService {
     const {value} = await Preferences.get({key: 'serveur'});
     return value;
   }
+
+  async setFavoris(favoris: Array<string>) {
+    await Preferences.set({
+      key: 'favoris',
+      value: JSON.stringify(favoris)
+    });
+  }
+
+  async getFavoris(): Promise<Array<string>> {
+    const {value} = await Preferences.get({key: 'favoris'});
+    return JSON.parse(value);
+  }
 }

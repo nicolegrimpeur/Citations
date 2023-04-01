@@ -35,37 +35,33 @@ export class AjouterPage implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  ionViewDidEnter() {
-    const date = new Date(Date.now());
-    this.dateSelect.el.value =
-      date.getFullYear() + '-' +
-      ((date.getMonth() < 10) ? '0' + date.getMonth() : date.getMonth()) + '-' +
-      ((date.getDate() < 10) ? '0' + date.getDate() : date.getDate());
+    this.date = new Date().toISOString();
   }
 
   envoyer() {
-    const objMessage: MessageModel = {
-      date: Date.now().toString(),
-      message: this.message,
-      auteur: this.nom + ' ' + this.date.match(/[0-9]{4}/g)[0].replace('0', 'k')
-    }
+    if (this.nom === '' || this.message === '') {
+      this.display.display('Veuillez remplir tous les champs').then();
+    } else {
+      const objMessage: MessageModel = {
+        date: this.date,
+        message: this.message,
+        auteur: this.nom
+      };
 
-    lastValueFrom(this.httpService.addMessage(this.nomServeur, objMessage))
-      .then(res => {
-        this.display.display({'code': 'Message ajouté', 'color': 'success'}).then();
-        this.message = '';
-        this.nom = '';
-        this.ionViewDidEnter();
-      })
-      .catch(err => {
-        if (err.status === 406)
-          this.display.display('Le serveur n\'existe pas').then();
-        else if (err.status === 0)
-          this.display.display('Serveur distant indisponible').then();
-        else
-          this.display.display('Une erreur a eu lieu').then();
-      })
+      lastValueFrom(this.httpService.addMessage(this.nomServeur, objMessage))
+        .then(res => {
+          this.display.display({'code': 'Message ajouté', 'color': 'success'}).then();
+          this.message = '';
+          this.nom = '';
+        })
+        .catch(err => {
+          if (err.status === 406)
+            this.display.display('Le serveur n\'existe pas').then();
+          else if (err.status === 0)
+            this.display.display('Serveur distant indisponible').then();
+          else
+            this.display.display('Une erreur a eu lieu').then();
+        })
+    }
   }
 }

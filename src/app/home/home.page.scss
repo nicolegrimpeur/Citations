@@ -2,18 +2,6 @@
   margin-top: 10vh;
 }
 
-ion-card {
-  @media screen and (min-width: 500px) {
-    width: 50vw;
-  }
-  @media screen and (max-width: 500px) {
-    width: 80vw;
-  }
-  text-align: center;
-  border-radius: 20px;
-  margin: 1vh auto auto;
-}
-
 .boutonSupp {
   @media screen and (min-width: 500px) {
     $taille: 3vw;
