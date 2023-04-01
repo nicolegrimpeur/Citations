@@ -31,7 +31,8 @@ export class JeuComponent implements OnInit {
     this.serveur = new Serveur(storageService, httpService, display, router);
     this.serveur.initNomServeur()
       .then(res => {
-        this.messages = new Messages(res, storageService, httpService, display, router);
+        this.messages = new Messages(storageService, httpService, display, router);
+        this.messages.setNomServeur(res);
         this.messages.getListeMessages()
           .then(res => {
             this.listeMessages = arrayShuffle(this.messages.listeMessages);

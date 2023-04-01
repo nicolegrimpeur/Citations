@@ -16,11 +16,13 @@ export class Messages {
   public listeMessages: Array<MessageModel> = [];
 
   constructor(
-    nomServeur: string,
     private storageService: StorageService,
     private httpService: HttpService,
     private display: Display,
     private router: Router) {
+  }
+
+  setNomServeur(nomServeur: string) {
     this.nomServeur = nomServeur;
   }
 
